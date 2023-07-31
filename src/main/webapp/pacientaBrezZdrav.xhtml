@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Keep It Simple &amp; Stupid</title>
+</h:head>
+
+<h:body>
+	<f:view>
+
+		[ <a href="#{facesContext.externalContext.applicationContextPath}/faces/all.xhtml">All</a> |
+		<a href="#{facesContext.externalContext.applicationContextPath}/faces/pacienti.xhtml?email=NULL">Pacienti</a> |
+		<a href="#{facesContext.externalContext.applicationContextPath}/faces/zdravniki.xhtml?email=NULL">Zdravniki </a> |
+		<a href="#{facesContext.externalContext.applicationContextPath}/faces/pacientaBrezZdrav.xhtml?email=NULL">Pacienti Brez Zdravniki </a> ]
+
+		<hr />
+
+		<f:metadata>
+			<f:viewParam name="email" value="#{parttwo.pacBrezZdravniki}" />
+		</f:metadata>
+
+
+
+		<h:form>
+			<p:dataTable var="o" value="#{parttwo.pacBrezZdravniki}" allowUnsorting="true" sortMode="single">
+				<p:column sortBy="#{o.ime}" headerText="Ime" sortOrder="asc">
+					<h:outputText value="#{o.ime}"/>
+				</p:column>
+				<p:column sortBy="#{o.priimek}" headerText="Priimek" sortOrder="asc">
+					<h:outputText value="#{o.priimek}"/>
+				</p:column>
+				<p:column sortBy="#{o.email}" headerText="Email" sortOrder="asc">
+					<h:link value="#{o.email}" outcome="detailsPacient">
+						<f:param name="email" value="#{o.email}" />
+					</h:link>
+				</p:column>
+				<p:column sortBy="#{o.email}" headerText="Urejanje">
+					<h:link value="Edit" outcome="pacienti">
+						<f:param name="email" value="#{o.email}" />
+					</h:link>
+				</p:column>
+				<p:column sortBy="#{o.email}" headerText="Brisanje">
+					<h:commandLink value="Delete" actionListener="#{parttwo.deletePerson(o)}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+	</f:view>
+</h:body>
+
+</html>

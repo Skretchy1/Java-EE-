@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+	<h:head>
+		<meta charset="UTF-8" />
+		<title>Sample</title>
+	</h:head>
+	
+	<h:body>
+		
+		<f:view>
+
+			<h:form>
+
+				[ <a href="#{facesContext.externalContext.applicationContextPath}/faces/all.xhtml">All</a> |
+				<a href="#{facesContext.externalContext.applicationContextPath}/faces/pacienti.xhtml?email=NULL">Pacienti</a> |
+				<a href="#{facesContext.externalContext.applicationContextPath}/faces/zdravniki.xhtml?email=NULL">Zdravniki </a> ]
+				<hr />
+
+				<h:dataTable value="#{jovan.allPeople}" var="o">
+					<h:column>
+						<h:link value="#{o.email}" outcome="details">
+							<f:param name="email" value="#{o.email}" />
+						</h:link>
+					</h:column>
+					<h:column>#{o.priimek}</h:column>
+					<h:column>#{o.ime}</h:column>
+					<h:column>
+						<h:link value="Edit" outcome="edit">
+							<f:param name="email" value="#{o.email}" />
+						</h:link> |
+						<h:commandLink value="Delete" actionListener="#{jovan.deletePerson(o)}" />
+					</h:column>
+				</h:dataTable>
+
+				<hr />
+
+				<h:dataTable value="#{partwo.allPeople}" var="o">
+					<h:column>
+						<h:link value="#{o.email}" outcome="details">
+							<f:param name="email" value="#{o.email}" />
+						</h:link>
+					</h:column>
+					<h:column>#{o.priimek}</h:column>
+					<h:column>#{o.ime}</h:column>
+					<h:column>
+						<h:link value="Edit" outcome="edit">
+							<f:param name="email" value="#{o.email}" />
+						</h:link> |
+						<h:commandLink value="Delete" actionListener="#{partwo.deletePerson(o)}" />
+					</h:column>
+				</h:dataTable>
+
+			</h:form>
+
+		</f:view>
+		
+	</h:body>
+	
+</html>

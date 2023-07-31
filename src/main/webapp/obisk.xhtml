@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<meta charset="UTF-8" />
+		<title>Sample</title>
+	</h:head>
+	
+	<h:body>
+		
+		<f:view>
+
+			<h:form>
+
+				[
+				<a href="#{facesContext.externalContext.applicationContextPath}/faces/zdravniki.xhtml?email=NULL">Nazaj </a> ]
+				<hr />
+
+				<f:metadata>
+					<f:viewParam name="patEmail" value="#{parttwo.pacNaObsik}"/>
+					<f:viewParam name="docEmail" value="#{parttwo.zdrNaObisk}"/>
+				</f:metadata>
+				<table border="0">
+					<tr>
+						<td>Zdravnik:</td>
+						<td>
+							<h:outputText id="doc" value="#{parttwo.selectedZdravnik.ime}"> </h:outputText>
+						</td>
+					</tr>
+					<tr>
+						<td>Pacient:</td>
+						<td>
+							<h:outputText id="pat" value="#{parttwo.pacient.ime}"> </h:outputText>
+						</td>
+					</tr>
+					<tr>
+						<td>Posebnosti:</td>
+						<td>
+							<h:inputText id="posebnosti" value="#{parttwo.noviPosebnosti}"> </h:inputText>
+						</td>
+					</tr>
+					<tr>
+						<td>Zdravila:</td>
+						<td>
+							<h:inputText id="zdravila" value="#{parttwo.noviZdravila}"> </h:inputText>
+						</td>
+					</tr>
+				</table>
+				<h:commandButton value="Shrani" action="#{parttwo.kreirajObisk}"/>
+
+				<hr />
+
+
+			</h:form>
+		</f:view>
+		
+	</h:body>
+	
+</html>

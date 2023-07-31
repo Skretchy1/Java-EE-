@@ -1,2 +1,2 @@
-# Java-EE-
-This is a project, which is written in JavaEE and JSF Elements.
+# EmptySample
+Empty Maven Web JakartaEE (JSF) project

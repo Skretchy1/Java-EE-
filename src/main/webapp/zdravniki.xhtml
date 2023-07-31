@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<meta charset="UTF-8" />
+		<title>Sample</title>
+	</h:head>
+	
+	<h:body>
+		
+		<f:view>
+
+			<h:form>
+
+				[ <a href="#{facesContext.externalContext.applicationContextPath}/faces/all.xhtml">All</a> |
+				<a href="#{facesContext.externalContext.applicationContextPath}/faces/pacienti.xhtml?email=tryout453@gmail.com">Pacienti</a> |
+				<a href="#{facesContext.externalContext.applicationContextPath}/faces/zdravniki.xhtml?email=tryout453@gmail.com">Zdravniki </a> |
+				<a href="#{facesContext.externalContext.applicationContextPath}/faces/pacientaBrezZdrav.xhtml?email=NULL">Pacienti Brez Zdravniki </a> ]
+				<hr />
+
+				<f:metadata>
+					<f:viewParam name="email" value="#{parttwo.selectedEmail}" />
+				</f:metadata>
+				<p:outputLabel for="n_ime" styleClass="block">Ime</p:outputLabel><br/>
+				<p:inputText id="n_ime" value="#{parttwo.selectedPerson.ime}"/><br/><br/>
+				<p:outputLabel for="n_priimek" styleClass="block">Priimek</p:outputLabel><br/>
+				<p:inputText id="n_priimek" value="#{parttwo.selectedPerson.priimek}"/><br/><br/>
+				<div class="field">
+					<p:outputLabel for="username2" styleClass="block">Email</p:outputLabel><br/>
+					<p:inputText id="username2" value="#{parttwo.selectedPerson.email}" styleClass="block ui-state-error"/><br/>
+					<small class="block ui-state-error">Morate napisati e-pošto.</small>
+				</div><br/>
+				<h:commandButton value="Shrani" action="#{parttwo.savePerson}"/>
+
+				<hr />
+
+
+
+				<p:dataTable var="o" value="#{parttwo.allPeople}" allowUnsorting="true" sortMode="single">
+					<p:column sortBy="#{o.ime}" headerText="Ime" sortOrder="asc">
+						<h:outputText value="#{o.ime}"/>
+					</p:column>
+					<p:column sortBy="#{o.priimek}" headerText="Priimek" sortOrder="asc">
+						<h:outputText value="#{o.priimek}"/>
+					</p:column>
+					<p:column sortBy="#{o.email}" headerText="Email" sortOrder="asc">
+						<h:link value="#{o.email}" outcome="detailsZdravnik">
+							<f:param name="email" value="#{o.email}" />
+						</h:link>
+					</p:column>
+					<p:column sortBy="#{o.email}" headerText="Urejanje">
+						<h:link value="Edit" outcome="zdravniki">
+							<f:param name="email" value="#{o.email}" />
+						</h:link>
+					</p:column>
+					<p:column sortBy="#{o.email}" headerText="Brisanje">
+						<h:commandLink value="Delete" actionListener="#{parttwo.deletePerson(o)}" />
+					</p:column>
+					<p:column sortBy="#{o.email}" headerText="Obiski">
+						<h:link value="Obisk" outcome="obisk">
+							<f:param name="email" value="#{o.email}" />
+						</h:link>
+					</p:column>
+				</p:dataTable>
+
+			</h:form>
+		</f:view>
+		
+	</h:body>
+	
+</html>

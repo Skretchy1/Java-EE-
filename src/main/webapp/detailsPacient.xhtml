@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Keep It Simple &amp; Stupid</title>
+</h:head>
+
+<h:body>
+	<f:view>
+
+<!--		[ <a href="#{facesContext.externalContext.applicationContextPath}/faces/all.xhtml">All</a> |-->
+<!--		<a href="#{facesContext.externalContext.applicationContextPath}/faces/pacienti.xhtml?email=NULL">Pacienti</a> |-->
+<!--		<a href="#{facesContext.externalContext.applicationContextPath}/faces/zdravniki.xhtml?email=NULL">Zdravniki </a> ]-->
+		[<a href="#{facesContext.externalContext.applicationContextPath}/faces/pacienti.xhtml?email=tryout453@gmail.com">Nazaj</a>]
+		<hr />
+
+		<f:metadata>
+			<f:viewParam name="email" value="#{parttwo.selectedEmailNaPacienta}" />
+		</f:metadata>
+
+<!--		Ime: <b>#{parttwo.pacient.ime}</b><br/>-->
+<!--		Priimek: <b>#{parttwo.pacient.priimek}</b><br/>-->
+<!--		E-mail: <b>#{parttwo.pacient.email}</b><br/>-->
+
+<!--		Izbrani Zdravnik: <b>#{parttwo.selectedZdravnik.ime}</b><br/>-->
+
+		<h:form>
+			<p:outputLabel for="n_izbirzdravnik" styleClass="block">Izberi zdravnik</p:outputLabel><br/>
+			<p:inputText id="n_izbirzdravnik" value="#{parttwo.noviZdravnikEmail}"/><br/><br/>
+			<h:commandButton value="Dodaj Zdravnik" action="#{parttwo.dodajNoviZdravnik1}"/><br/>
+
+			<h:dataTable value="#{parttwo.selectedPacient}" var="p">
+				<h:column>
+					<f:facet name="header">Ime</f:facet>
+					<h:outputText value="#{p.ime}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Priimek</f:facet>
+					<h:outputText value="#{p.priimek}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">E-mail</f:facet>
+					<h:outputText value="#{p.email}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Zdravnik</f:facet>
+					<h:outputText value="#{p.izbranZdravnik.ime}" />
+				</h:column>
+			</h:dataTable>
+		</h:form>
+
+	</f:view>
+</h:body>
+
+</html>
